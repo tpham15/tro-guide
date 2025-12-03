@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trọ Guide - Đặt lịch xem phòng</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero-card">
+      <div class="hero-header">
+        <span class="logo-chip">TG</span>
+        <span class="hero-badge">Không môi giới · Không thổi giá</span>
+      </div>
+      <h1>Trọ Guide</h1>
+      <p class="hero-subtitle">
+        Tìm phòng trọ thật – không môi giới, không nâng giá. Guide địa phương dẫn bạn xem 2–3 phòng phù hợp chỉ trong một lịch hẹn.
+      </p>
+    </header>
+
+    <main class="form-shell">
+      <section class="form-card">
+        <div class="form-head">
+          <div class="form-copy">
+            <p class="form-kicker">Yêu cầu dẫn xem</p>
+            <h2>Chia sẻ nhu cầu của bạn</h2>
+            <p>Điền thông tin để Trọ Guide sắp xếp guide và gọi xác nhận trong vài phút.</p>
+          </div>
+          <div class="meta">
+            <span class="meta-item">
+              <span class="meta-icon" aria-hidden="true">📞</span>
+              <strong>24/7</strong>
+              <small>Hỗ trợ</small>
+            </span>
+            <span class="meta-item">
+              <span class="meta-icon" aria-hidden="true">✨</span>
+              <strong>150+</strong>
+              <small>Guide tuyển chọn</small>
+            </span>
+          </div>
+        </div>
+
+        <form id="booking-form" class="booking-form">
+          <div class="form-grid">
+            <label class="field">
+              <span>Họ tên*</span>
+              <input type="text" name="customer_name" required placeholder="Nguyễn Văn A" />
+            </label>
+            <label class="field">
+              <span>Số điện thoại*</span>
+              <input type="tel" name="customer_phone" required placeholder="090 xxx xxxx" />
+            </label>
+            <label class="field">
+              <span>Zalo</span>
+              <input type="text" name="customer_zalo" placeholder="@zalo hoặc số" />
+            </label>
+            <div class="field span-2 area-field-group">
+              <span>Khu vực bạn muốn ở*</span>
+              <div class="area-fields">
+                <label class="sub-field">
+                  <span>Khu vực chính</span>
+                  <select name="area_main" required>
+                    <option value="" selected disabled>Chọn khu vực</option>
+                    <option value="TP.Thủ Đức">TP.Thủ Đức</option>
+                    <option value="Quận 1">Quận 1</option>
+                    <option value="Quận 3">Quận 3</option>
+                    <option value="Quận 4">Quận 4</option>
+                    <option value="Quận 5">Quận 5</option>
+                    <option value="Quận 6">Quận 6</option>
+                    <option value="Quận 7">Quận 7</option>
+                    <option value="Quận 8">Quận 8</option>
+                    <option value="Quận 10">Quận 10</option>
+                    <option value="Quận 11">Quận 11</option>
+                    <option value="Quận 12">Quận 12</option>
+                    <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                    <option value="Quận Bình Tân">Quận Bình Tân</option>
+                    <option value="Quận Gò Vấp">Quận Gò Vấp</option>
+                    <option value="Quận Tân Bình">Quận Tân Bình</option>
+                    <option value="Quận Tân Phú">Quận Tân Phú</option>
+                    <option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                    <option value="Huyện Bình Chánh">Huyện Bình Chánh</option>
+                    <option value="Huyện Cần Giờ">Huyện Cần Giờ</option>
+                    <option value="Huyện Củ Chi">Huyện Củ Chi</option>
+                    <option value="Huyện Hóc Môn">Huyện Hóc Môn</option>
+                    <option value="Huyện Nhà Bè">Huyện Nhà Bè</option>
+                    <option value="(Khác)">(Khác)</option>
+                  </select>
+                </label>
+                <label class="sub-field">
+                  <span>Mô tả chi tiết</span>
+                  <input type="text" name="area_detail" placeholder="VD: Gần ĐH Kinh Tế, đường Xô Viết Nghệ Tĩnh..." />
+                  <small class="field-hint">Cho chúng tôi biết sát nhất bạn muốn ở đâu.</small>
+                </label>
+              </div>
+            </div>
+            <label class="field">
+              <span>Ngân sách tối thiểu (triệu VND)</span>
+              <input type="number" name="budget_min" min="0.1" step="0.1" placeholder="3.5" inputmode="decimal" />
+              <small class="field-hint">VD: 3.5 nghĩa là 3.500.000đ</small>
+            </label>
+            <label class="field">
+              <span>Ngân sách tối đa (triệu VND)</span>
+              <input type="number" name="budget_max" min="0.1" step="0.1" placeholder="8.0" inputmode="decimal" />
+              <small class="field-hint">VD: 8.0 nghĩa là 8.000.000đ</small>
+            </label>
+            <label class="field">
+              <span>Loại phòng*</span>
+              <select name="room_type" required>
+                <option value="cth">Chung cư thường</option>
+                <option value="ccmini">Chung cư mini</option>
+                <option value="canho">Căn hộ dịch vụ</option>
+                <option value="tro">Phòng trọ</option>
+                <option value="ghep">Phòng ghép</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Số phòng muốn xem</span>
+              <select name="rooms_to_view">
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+            <label class="field span-2">
+              <span>Thời gian rảnh*</span>
+              <input type="text" name="time_slot" required placeholder="Chiều nay 15-18h, cuối tuần..." />
+            </label>
+            <label class="field span-2">
+              <span>Ghi chú thêm</span>
+              <textarea name="note" placeholder="Ví dụ: cần chỗ gửi xe, ưu tiên phòng mới..."></textarea>
+            </label>
+          </div>
+          <div class="cta-block">
+            <div class="guide-fee-info">
+              <span aria-hidden="true">ℹ️</span>
+              <p>Phí công guide từ 20.000đ – 50.000đ/chuyến. Chỉ thanh toán sau khi bạn xem phòng.</p>
+            </div>
+            <button type="submit" class="primary-btn">Gửi yêu cầu</button>
+            <p class="cta-note">Không thu tiền chủ trọ – phí dẫn xem được báo trước khi xác nhận.</p>
+          </div>
+        </form>
+
+        <div id="message" class="alert" style="display:none"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const form = document.getElementById('booking-form');
+    const messageBox = document.getElementById('message');
+
+    const showMessage = (type, text) => {
+      messageBox.textContent = text;
+      messageBox.className = `alert ${type}`;
+      messageBox.style.display = 'block';
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      messageBox.style.display = 'none';
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      payload.budget_min = payload.budget_min ? Number(payload.budget_min) : null;
+      payload.budget_max = payload.budget_max ? Number(payload.budget_max) : null;
+      payload.rooms_to_view = payload.rooms_to_view ? Number(payload.rooms_to_view) : 1;
+
+      const areaMain = payload.area_main ? payload.area_main.trim() : '';
+      const areaDetail = payload.area_detail ? payload.area_detail.trim() : '';
+      const existingArea = payload.area ? payload.area.trim() : '';
+
+      let computedArea = existingArea;
+      if (!computedArea) {
+        if (areaMain && areaDetail) {
+          computedArea = `${areaMain} - ${areaDetail}`;
+        } else if (areaMain) {
+          computedArea = areaMain;
+        } else if (areaDetail) {
+          computedArea = areaDetail;
+        }
+      }
+
+      payload.area_main = areaMain || null;
+      payload.area_detail = areaDetail || null;
+      payload.area = computedArea;
+
+      try {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          const body = await res.json();
+          throw new Error(body.error || 'Không gửi được yêu cầu');
+        }
+        form.reset();
+        showMessage('success', 'Đã gửi yêu cầu. Trọ Guide sẽ liên hệ bạn sớm nhất!');
+      } catch (err) {
+        showMessage('error', err.message);
+      }
+    });
+  </script>
+</body>
+</html>

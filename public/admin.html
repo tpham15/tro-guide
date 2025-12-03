@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Trọ Guide</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Bảng điều khiển Trọ Guide</h1>
+
+    <div class="tab-nav">
+      <button class="tab-button active" data-tab="bookings">Bookings</button>
+      <button class="tab-button" data-tab="guides">Guides</button>
+    </div>
+
+    <section id="bookings-section" class="tab-section active">
+      <section class="status-filter">
+        <label class="select-inline">
+          Lọc theo trạng thái:
+          <select id="status-filter">
+            <option value="">Tất cả</option>
+            <option value="pending">Pending</option>
+            <option value="assigned">Assigned</option>
+            <option value="done">Done</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </label>
+        <button id="refresh-btn" style="margin-top:12px;width:160px">Tải lại</button>
+      </section>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Khách hàng</th>
+            <th>Khu vực</th>
+            <th>Ngân sách</th>
+            <th>Loại</th>
+            <th>Status</th>
+            <th>Guide</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="bookings-body"></tbody>
+      </table>
+    </section>
+
+    <section id="guides-section" class="tab-section">
+      <h2>Danh sách Guides</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tên</th>
+            <th>Số điện thoại</th>
+            <th>Khu vực</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody id="guides-body"></tbody>
+      </table>
+
+      <div class="guide-form-card">
+        <h3>Thêm guide mới</h3>
+        <form id="guide-form" class="guide-form">
+          <label>
+            Tên*
+            <input type="text" name="name" required placeholder="VD: Nguyễn Văn A" />
+          </label>
+          <label>
+            Số điện thoại*
+            <input type="text" name="phone" required placeholder="0909 xxx xxx" />
+          </label>
+          <label>
+            Khu vực chính*
+            <input type="text" name="area" required placeholder="VD: Quận Bình Thạnh" />
+          </label>
+          <label>
+            Ghi chú
+            <input type="text" name="note" placeholder="Thông tin thêm..." />
+          </label>
+          <button type="submit">Tạo guide</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script src="/admin.js" type="module"></script>
+</body>
+</html>
