@@ -104,16 +104,17 @@
               <input type="number" name="budget_max" min="0.1" step="0.1" placeholder="8.0" inputmode="decimal" />
               <small class="field-hint">VD: 8.0 nghĩa là 8.000.000đ</small>
             </label>
-            <label class="field">
-              <span>Loại phòng*</span>
-              <select name="room_type" required>
-                <option value="cth">Chung cư thường</option>
-                <option value="ccmini">Chung cư mini</option>
-                <option value="canho">Căn hộ dịch vụ</option>
-                <option value="tro">Phòng trọ</option>
-                <option value="ghep">Phòng ghép</option>
-              </select>
-            </label>
+            <div class="field span-2 room-type-group">
+              <span>Loại phòng muốn xem* <small class="field-hint">Chọn tối đa 2 loại phù hợp nhất</small></span>
+              <div class="room-type-options">
+                <label><input type="checkbox" name="room_type" value="tro" /> Phòng trọ</label>
+                <label><input type="checkbox" name="room_type" value="cth" /> Chung cư thường</label>
+                <label><input type="checkbox" name="room_type" value="ccmini" /> Chung cư mini</label>
+                <label><input type="checkbox" name="room_type" value="canho" /> Căn hộ dịch vụ</label>
+                <label><input type="checkbox" name="room_type" value="ghep" /> Phòng ghép</label>
+                <label><input type="checkbox" name="room_type" value="nhangan" /> Nhà nguyên căn</label>
+              </div>
+            </div>
             <label class="field">
               <span>Số phòng muốn xem</span>
               <select name="rooms_to_view">
@@ -163,6 +164,27 @@
       messageBox.style.display = 'block';
     };
 
+    const roomTypeInputs = Array.from(document.querySelectorAll('input[name="room_type"]'));
+
+    const enforceRoomTypeLimit = () => {
+      const checked = roomTypeInputs.filter((input) => input.checked);
+      if (checked.length >= 2) {
+        roomTypeInputs.forEach((input) => {
+          if (!input.checked) {
+            input.disabled = true;
+          }
+        });
+      } else {
+        roomTypeInputs.forEach((input) => {
+          input.disabled = false;
+        });
+      }
+    };
+
+    roomTypeInputs.forEach((input) => {
+      input.addEventListener('change', enforceRoomTypeLimit);
+    });
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       messageBox.style.display = 'none';
@@ -173,6 +195,15 @@
       payload.budget_min = payload.budget_min ? Number(payload.budget_min) : null;
       payload.budget_max = payload.budget_max ? Number(payload.budget_max) : null;
       payload.rooms_to_view = payload.rooms_to_view ? Number(payload.rooms_to_view) : 1;
+
+      const selectedRoomTypes = Array.from(
+        form.querySelectorAll('input[name="room_type"]:checked')
+      ).map((input) => input.value);
+      if (!selectedRoomTypes.length) {
+        showMessage('error', 'Vui lòng chọn ít nhất 1 loại phòng.');
+        return;
+      }
+      payload.room_type = selectedRoomTypes.join(',');
 
       const areaMain = payload.area_main ? payload.area_main.trim() : '';
       const areaDetail = payload.area_detail ? payload.area_detail.trim() : '';
@@ -204,6 +235,9 @@
           throw new Error(body.error || 'Không gửi được yêu cầu');
         }
         form.reset();
+        roomTypeInputs.forEach((input) => {
+          input.disabled = false;
+        });
         showMessage('success', 'Đã gửi yêu cầu. Trọ Guide sẽ liên hệ bạn sớm nhất!');
       } catch (err) {
         showMessage('error', err.message);

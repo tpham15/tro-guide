@@ -89,6 +89,20 @@ const renderBookings = (bookings) => {
       const budget = booking.budget_min || booking.budget_max
         ? `${booking.budget_min || '?'} - ${booking.budget_max || '?'}`
         : 'N/A';
+      const ROOM_TYPE_LABELS = {
+        tro: 'Phòng trọ',
+        cth: 'Chung cư thường',
+        ccmini: 'Chung cư mini',
+        canho: 'Căn hộ dịch vụ',
+        ghep: 'Phòng ghép',
+        nhangan: 'Nhà nguyên căn'
+      };
+      const roomTypes = booking.room_type
+        ? booking.room_type
+            .split(',')
+            .map((type) => ROOM_TYPE_LABELS[type.trim()] || type.trim())
+            .join(', ')
+        : '-';
       const areaDisplay = [];
       if (booking.area_main) {
         areaDisplay.push(`<div class="area-main-text">${booking.area_main}</div>`);
@@ -117,7 +131,7 @@ const renderBookings = (bookings) => {
           </td>
           <td>${areaDisplay.join('')}</td>
           <td>${budget}</td>
-          <td>${booking.room_type}</td>
+          <td>${roomTypes}</td>
           <td>${booking.status}</td>
           <td>${booking.guide_id || '-'}</td>
           <td>${actions}</td>
