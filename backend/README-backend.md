@@ -8,7 +8,6 @@
 
 2. **Environment variables**
    - `PORT` – Render tự set, không cần chỉnh.
-   - `FRONTEND_ORIGIN` – domain của static frontend (ví dụ `https://tro-guide.web.app`).
    - `DB_PATH` – đường dẫn tới SQLite file (mặc định là `../data.db` tính từ `backend/src/`).
 
 3. **Persistent SQLite**
@@ -16,8 +15,7 @@
    - Hoặc dùng Render PostgreSQL và cập nhật code (chưa triển khai).
 
 4. **CORS**
-   - Trong `src/server.js`, `FRONTEND_ORIGIN="*"` thì API mở cho mọi domain (chỉ nên dùng khi dev).
-   - Khi deploy, set `FRONTEND_ORIGIN` trùng với domain static frontend để giảm rủi ro.
+   - CORS whitelist nằm trực tiếp trong `src/server.js` (cập nhật nếu thêm domain mới).
 
 5. **Health check**
    - Render hỗ trợ hitting `/api/guides` hoặc `/api/bookings` – không còn serving static files.

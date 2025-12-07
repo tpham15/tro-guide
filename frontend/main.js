@@ -2,13 +2,8 @@
  * Standalone booking form logic for the static frontend.
  * Update BASE_API_URL to match the deployed backend domain (Render, etc.).
  */
-const resolveDefaultApiUrl = () => {
-  const host = window.location.hostname;
-  const isLocalhost = host === 'localhost' || host === '127.0.0.1';
-  return isLocalhost ? 'http://localhost:3000' : 'https://your-backend-domain.com';
-};
-
-const BASE_API_URL = window.BASE_API_URL || resolveDefaultApiUrl();
+// Change this when deploying backend to another domain.
+const BASE_API_URL = 'https://tro-guide.onrender.com';
 const BOOKINGS_ENDPOINT = `${BASE_API_URL}/api/bookings`;
 
 const form = document.getElementById('booking-form');

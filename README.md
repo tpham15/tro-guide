@@ -23,7 +23,6 @@ npm run dev   # nodemon src/server.js
 ```
 
 - API chạy ở `http://localhost:3000` (đổi bằng `PORT`).
-- Biến `FRONTEND_ORIGIN` dùng để cấu hình CORS khi deploy (mặc định `*` cho local).
 - Các script khởi tạo DB nằm trong `backend/src/scripts`.
 
 ### Khởi tạo database
