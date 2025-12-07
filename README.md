@@ -2,59 +2,56 @@
 
 Dịch vụ dẫn khách xem phòng trọ không môi giới, không thổi giá.
 
-## Yêu cầu hệ thống
+## Kiến trúc mới
 
-- Node.js 18+
-- SQLite CLI (để tạo file database)
-
-## Cài đặt
-
-```bash
-npm install
-```
-
-## Khởi tạo database
-
-```bash
-# tạo file data.db với schema
-sqlite3 data.db < src/scripts/init-db.sql
-
-# (tuỳ chọn) thêm dữ liệu demo
-sqlite3 data.db < src/scripts/seed-demo.sql
-```
-
-## Chạy server
-
-```bash
-npm run dev
-# hoặc chạy production
-npm start
-```
-
-Server chạy ở `http://localhost:3000` (đổi bằng biến môi trường `PORT`).
-
-## Frontend
-
-- Trang khách: `http://localhost:3000/index.html`
-- Trang admin: `http://localhost:3000/admin.html`
-
-## Cấu trúc dự án
+Dự án được tách rõ thành backend API (Express + SQLite) và static frontend:
 
 ```
 tro-guide/
-├── package.json
-├── src/
-│   ├── server.js
-│   ├── db.js
-│   ├── config.js
-│   ├── routes/
-│   └── services/
-├── public/
-│   ├── index.html
-│   ├── admin.html
-│   └── admin.js
-└── src/scripts/
-    ├── init-db.sql
-    └── seed-demo.sql
+├── backend/     # Node/Express REST API, kết nối SQLite
+├── frontend/    # HTML/CSS/JS thuần, gọi API qua fetch
+├── data.db      # SQLite database (cùng cấp root để cả hai môi trường dùng chung)
+└── package.json # Workspace gốc chỉ để chạy npm workspaces
 ```
-# tro-guide
+
+## Backend
+
+```
+cd backend
+npm install
+npm run dev   # nodemon src/server.js
+```
+
+- API chạy ở `http://localhost:3000` (đổi bằng `PORT`).
+- Biến `FRONTEND_ORIGIN` dùng để cấu hình CORS khi deploy (mặc định `*` cho local).
+- Các script khởi tạo DB nằm trong `backend/src/scripts`.
+
+### Khởi tạo database
+
+```bash
+# tạo schema
+sqlite3 data.db < backend/src/scripts/init-db.sql
+
+# (tuỳ chọn) thêm dữ liệu demo
+sqlite3 data.db < backend/src/scripts/seed-demo.sql
+```
+
+Xem thêm hướng dẫn deploy Render trong `backend/README-backend.md`.
+
+## Frontend
+
+Static assets nằm trong `frontend/`. Không cần build – có thể mở `frontend/index.html` trực tiếp
+hoặc deploy lên Netlify/Vercel/Render Static.
+
+- `frontend/main.js` (booking form) và `frontend/admin.js` (dashboard) dùng biến
+  `BASE_API_URL` để gọi API (auto default `http://localhost:3000` khi chạy local).
+  Khi deploy, đặt `window.BASE_API_URL` trong HTML hoặc sửa giá trị mặc định.
+- Có sẵn script dev: `npm run dev` (dùng `npx serve .`) nếu cần một HTTP server tĩnh.
+
+## Lệnh hữu ích ở workspace gốc
+
+```bash
+npm run dev:backend      # chạy API
+npm run start:backend    # chạy API production
+npm run dev:frontend     # preview frontend tĩnh qua npx serve
+```

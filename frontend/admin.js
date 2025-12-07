@@ -1,3 +1,15 @@
+/**
+ * Standalone admin dashboard logic for the static frontend.
+ * Update BASE_API_URL to point at the deployed backend JSON API.
+ */
+const resolveDefaultApiUrl = () => {
+  const host = window.location.hostname;
+  const isLocalhost = host === 'localhost' || host === '127.0.0.1';
+  return isLocalhost ? 'http://localhost:3000' : 'https://your-backend-domain.com';
+};
+
+const BASE_API_URL = window.BASE_API_URL || resolveDefaultApiUrl();
+
 const bookingsBody = document.getElementById('bookings-body');
 const statusFilter = document.getElementById('status-filter');
 const refreshBtn = document.getElementById('refresh-btn');
@@ -8,8 +20,8 @@ const guidesBody = document.getElementById('guides-body');
 const guideForm = document.getElementById('guide-form');
 let guidesLoaded = false;
 
-const fetchJSON = async (url, options = {}) => {
-  const res = await fetch(url, options);
+const fetchJSON = async (path, options = {}) => {
+  const res = await fetch(`${BASE_API_URL}${path}`, options);
   if (!res.ok) {
     let message = 'Có lỗi xảy ra';
     try {
